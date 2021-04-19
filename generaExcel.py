@@ -4,7 +4,7 @@ import openpyxl, os
 
 #Crea nuevo archivo excel
 
-def genera_archivo(nombre_cliente, nombre_archivo, encabezado, cuerpo):
+def genera_archivo(nombre_cliente, nombre_archivo, path, encabezado, cuerpo):
 	"""Creamos archivo"""
 	wb = openpyxl.Workbook()
 
@@ -24,7 +24,8 @@ def genera_archivo(nombre_cliente, nombre_archivo, encabezado, cuerpo):
 	for i in cuerpo:
 		sheet.append(i)
 
-	guarda_archivo(nombre_archivo, '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Results', wb)
+	#guarda_archivo(nombre_archivo, '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Results', wb)
+	guarda_archivo(nombre_archivo, path, wb)
 
 
 def guarda_archivo(nombre_archivo, path, wb_object):
