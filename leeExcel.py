@@ -31,6 +31,9 @@ def lee_excel(nombre_cliente, estado_empleado):
 	#contenido_tmp = []
 	contenido = []
 
+	#Counter que se utilizada cuando se guarda el contenido para no insertar lineas en blanco
+	counter = 0
+
 	#print(sheet_rows_qty)
 	#print(sheet_columns_qty)
 	#print(rango_celdas)
@@ -56,12 +59,16 @@ def lee_excel(nombre_cliente, estado_empleado):
 				#if not ((valor.upper()) == 'SUSPENDIDO'):
 				if ((valor.upper()) == estado_empleado.upper()):
 					#print(rango_celdas[j][i].value)
+					#Agregamos uno al counter para agregar las filas sin espacios en blanco
+					counter += 1
+					#contenido_tmp.append(rango_celdas[counter][i].value)
 					contenido_tmp.append(rango_celdas[j][i].value)
 
 		if(j > 0):
-			contenido.append(contenido_tmp)
+			if ((valor.upper()) == estado_empleado.upper()):
+				contenido.append(contenido_tmp)
 
-	#print(encabezado)
-	#print(contenido)
+	print(encabezado)
+	print(contenido)
 
 	genera_archivo(nombre_cliente, nombre_cliente+'_'+'18042021', path_destino, encabezado, contenido)
