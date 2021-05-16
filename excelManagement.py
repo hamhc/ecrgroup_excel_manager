@@ -2,11 +2,14 @@
 import openpyxl, os, datetime
 
 class ExcelManager:
-    def __init__(self, cliente, estado_empleado):
+    def __init__(self, cliente, estado_empleado, nombre_archivo):
         self.cliente = cliente
         self.estado_empleado = estado_empleado
-        self.path_origen = '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Planillas/p1_sample.xlsx'
-        self.path_destino = '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Results/'
+        #En la carpeta origen se agrega el archivo origen
+        self.path_origen = '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Planillas/Origen/' \
+                           + nombre_archivo +'.xlsx'
+        #El archivo generado se genera en Results
+        self.path_destino = '/Users/johamhernandez/Documents/Proyectos Python/ECR_Group/Proyecto/Planillas/Results/'
         self.define_fecha()
         self.nombre_archivo = cliente + '_' + self.date + '.xlsx'
 
@@ -33,7 +36,8 @@ class ExcelManager:
         sheet_rows_qty = hoja.max_row
 
         # Asignamos al rango desde A1 hasta Z + el total de filas que hay en la hoja
-        rango_celdas = hoja['A1':'Z' + str(sheet_rows_qty)]
+        #TODO: validar como extender el rango de acuerdo a la informacion disponible o ponerlo como parametro
+        rango_celdas = hoja['A1':'AB' + str(sheet_rows_qty)]
 
         encabezado = []
         # contenido_tmp = []
@@ -116,7 +120,7 @@ class ExcelManager:
 
         # Guardamos el achivo excel después de cambiarnos de ruta
         # NOTA: si no lo guardamos, solo existe en memoria
-       self.wb_object.save(self.nombre_archivo)
+        self.wb_object.save(self.nombre_archivo)
 
     def define_fecha(self):
         """Definimos un string de fecha para concantenarle al nombre del archivo
@@ -130,5 +134,5 @@ class ExcelManager:
         self.genera_archivo()
         self.guarda_archivo()
 
-p1 = ExcelManager('DEPOR', 'suspendido')
+p1 = ExcelManager('NOVAVERDE', 'vigente', 'DOTACION_CUENTAS_2021_new')
 p1.ejecutor()
